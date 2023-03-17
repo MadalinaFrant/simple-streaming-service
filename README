@@ -1,0 +1,153 @@
+Tema 2 SD - Frant Madalina 315CB
+
+In cadrul arhivei exista 5 fisiere sursa (lista.c, stiva.c, coada.c,
+serial.c, main.c) si 4 fisiere header (lista.h, stiva.h, coada.h,
+serial.h).
+
+
+In fisierul lista.c sunt implementate functii asupra listei generica
+simplu inlantuita:
+
+Functia AlocCelula aloca spatiu pentru o celula si, in cazul alocarii reusite,
+completeaza campul info al acesteia cu valoarea primita ca parametru. Functia
+returneaza adresa celulei create, respectiv NULL.
+
+Functia AfisareLista afiseaza in fisier elementele unei liste folosind o 
+functie de tip TFAfi, respectiv "[]." daca lista este vida.
+
+Functia DistrugeLista elimina toate elementele din lista (eliberandu-se 
+spatiul ocupat de acestea), astfel: cat timp lista nu este vida, se elimina
+primul element din lista. Daca lista este vida, nu se intra in while (nu 
+trebuie distrus nimic).
+
+Functia LungimeLista calculeaza numarul de elemente in lista.
+
+Functia InsOrd insereaza ordonat in lista (descrescator după rating, iar 
+in caz de rating egal, crescator după nume), returnand pozitia la care s-a
+facut inserarea. Functia foloseste pentru comparare o functie TFCmp care
+returneaza numarul elementului ce trebuie introdus mai intai.
+
+Functia InsTop insereaza un element in lista la pozitia data astfel:
+se parcurge lista retinand pozitia curenta (in p), in momentul ajungerii 
+la poztia de inserat se insereaza elementul.
+
+Functia ElimTop elimina toate elementele listei aflate pe pozitii mai
+mari ca 10 astfel: daca lungimea listei este mai mare ca 10: parcurge lista
+pana la elementul 11 si se elimina toate elementele incepand cu acesta. 
+
+Functia Elim elimina elementul x din lista astfel: in momentul gasirii
+elementului ce trebuie eliminat se refac legaturile apoi se elibereaza 
+spatiul ocupat de element si de celula.
+
+Functia GasesteInLista parcurge lista si returneaza elementul cu numele
+x in momentul gasirii acestuia. Daca lista este vida sau elementul nu a
+fost gasit se intoarce NULL.
+
+Functia ExistaInLista returneaza 1 daca exista in lista elementul cu numele
+x, respectiv 0 daca nu exista, folosind functia GasesteInLista.
+
+
+In fisierul stiva.c sunt implementate functii asupra stivei:
+
+Functia InitS initializeaza stiva cu elemente de dimensiune d, aloca memoria
+corespunzatoare; returneaza stiva creata.
+
+Functia Push adauga elementul in varful stivei, actualizand de fiecare
+data varful stivei.
+
+Functia ResetS transforma stiva in stiva vida, eliminand toate elementele
+existente.
+
+Functia DistrS elibereaza intreg spatiul ocupat de stiva, apeland functia
+ResetS.
+
+Functia AfiStiva afiseaza stiva, afisand lista data de varful stivei,
+apeland functia AfisareLista.
+
+
+In fisierul coada.c sunt implementate functii asupra cozii:
+
+Functia InitQ initializeaza coada cu elemente de dimensiune d, aloca memoria
+corespunzatoare; returneaza coada creata.
+
+Functia InsQ adauga elementul la sfarsitul cozii, actualizand de fiecare
+data sfarsitul cozii, inceputul trebuie actualizat doar in cazul cozii vide.
+
+Functia ElimCoada elimina un element din coada (de oriunde din aceasta).
+Functia este asemanatoare Functiei Elim, dar in plus trebuie actualizat 
+sfarsitul cozii in cazul in care se elimina ultimul element din lista 
+data de inceputul cozii.
+
+Functia ResetQ transforma coada in coada vida, eliminand toate elementele
+existente.
+
+Functia DistrQ elibereaza intreg spatiul ocupat de coada, apeland functia
+ResetQ.
+
+Functia AfiCoada afiseaza coada, afisand lista data de inceputul cozii,
+apeland functia AfisareLista.
+
+
+In fisierul serial.c sunt implementate functiile:
+
+Functia InitSezon initializeaza si returneaza o structura de tip sezon, 
+initializand coada episoade cu elemente de tip int (durata episod). 
+
+Functia InitSerial initializeaza si returneaza o structura de tip serial, 
+initializand coada sezoane cu elemente de tip sezon si alocand spatiu
+pentru campul nume. 
+
+Functia cmpIns, folosita in cadrul inserarii ordonate, returneaza numarul 
+elementului ce trebuie inserat mai intai.
+
+Functia cmpName compara 2 elemente de tip serial, returnand 0 daca sunt egale, 
+1 in caz contrar.
+
+Functia comp compara numele unui element de tip serial cu un nume primit ca
+parametru, returnand 0 daca sunt egale, 1 in caz contrar.
+
+Functia AfiSerial afiseaza campurile nume si rating ale unui serial.
+
+Functia ElibSezon elibereaza spatiul alocat pentru o structura de tip sezon,
+apeland functia free pentru eliberarea cozii episoade.
+
+Functia ElibSerial elibereaza spatiul alocat pentru o structura de tip serial,
+apeland functia ElibSezon pentru eliberarea cozii sezoane.
+
+Functia copieSerial creeaza si returneaza o copie a serialului primit ca
+parametru.
+
+Functia Add_Serial folosita pentru inserarea in listele din categoriile 1, 2, 3
+creeaza un serial, adaugandu-l (ordonat) in lista folosind functia InsOrd.
+
+Functia Add_Top folosita pentru inserarea in lista Top10 creeaza un serial,
+adaugandu-l in lista folosind functia InsTop, apoi eliminand eventualele
+elemente de pe pozitii mai mari ca 10 apeland functia ElimTop.
+
+Functia Add_Later gaseste in lista elementul ce trebuie mutat, ii creeaza o
+copie, insereaza copia in coada watch_later si elimina din lista elementul
+gasit.
+
+Functia Add_Sez gaseste in lista serialul caruia ii trebuie adaugat un sezon,
+apoi creeaza sezonul ce va fi adaugat in coada sezoane a serialului gasit.
+
+Functia Watch gaseste in lista elementul ce trebuie vizionat, ii creeaza o
+copie, elimina din lista elementul gasit si insereaza copia in stiva 
+currently_watching. Se vizioneaza durata minute din serial, decrementand
+numarul de minute din fiecare episod. Daca serialul a fost vizionat integral
+se mai creeaza o copie a acestuia care se adauga in stiva history, apoi se
+elimina serialul din stiva currently_watching.
+
+Functia WatchFromWatchLater este asemanatoare functiei Watch, apeland 
+insa functia ElimCoada in momentul eliminarii serialului din coada,
+deoarece trebuie actualizat sfarsitul cozii in cazul eliminarii ultimului
+element din lista data de inceputul cozii (in cazul unei stive se poate
+apela functia Elim pentru lista data de varful stivei).
+
+
+In main se citeste din fisier linie cu linie si in functie de primul cuvant
+de pe linie se realizeaza operatia corespunzatoare.
+
+Punctaj obtinut la rularea pe calculatorul propriu:
+    Total: [135/135]
+    Bonus: [20/20]
